@@ -22,7 +22,19 @@ object Main {
   /**
    * Exercise 2
    */
-  def balance(chars: List[Char]): Boolean = ???
+  def balance(chars: List[Char]): Boolean = {
+    def innerBal(open:Int, chars: List[Char]): Boolean = {
+      if (chars.isEmpty)
+        open == 0
+      else if (chars.head == '(')
+        innerBal(open + 1, chars.tail)
+      else if (chars.head == ')')
+        open > 0 && innerBal(open - 1, chars.tail)
+      else
+        innerBal(open, chars.tail)
+    }
+    innerBal(0, chars)
+  }
 
   /**
    * Exercise 3
